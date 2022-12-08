@@ -1,0 +1,84 @@
+class Book {
+    constructor(title, description, author) {
+        this.title = title;
+        this.description = description;
+        this.author = author;
+    }
+}
+            
+class Library {
+    constructor() {
+        this.books = [];
+    }
+
+    addBook(bookInfo) { 
+        let book = new Book(bookInfo['title'], bookInfo['description'], bookInfo['author'])
+        this.books.push(book)
+        console.log("Livro "+bookInfo['title']+" adicionado.")
+        return
+    }
+
+    getBooks() { 
+        console.log(this.books)
+        return
+    }
+
+    removeBookById(id) {
+        const newbooks = []
+        for (let i = 0; i < this.books.length; i++) {
+            if (this.books[i]['title'] !== id) {
+                newbooks.push(this.books[i])
+            }else{
+                console.log("Livro "+id+" removido.")
+            }
+        }
+        this.books = newbooks
+        return
+    }
+
+    getBookById(id) {
+        for (let i = 0; i < this.books.length; i++) {
+            if (this.books[i]['title'] == id) {
+                console.log(this.books[i])
+                return
+            }
+        }
+        console.log("Livro "+id+" não encontrado.")
+        return
+    }
+
+    updateBookById(id, info) {
+        for (let i = 0; i < this.books.length; i++) {
+            if (this.books[i]['title'] == id) { 
+                this.books[i]['title'] = info['title']; 
+                this.books[i]['description'] = info['description']; 
+                this.books[i]['author'] = info['author'];
+                console.log("Livro "+this.books[i]['title']+" atualizado.")
+                return
+            }
+        }
+        console.log("Livro "+id+" não encontrado.")
+        return
+        
+    }
+
+}
+
+const biblioteca = new Library()
+
+biblioteca.addBook({title: 'Zorro', description: 'O herói mascarado', author: 'Isabel Allende'})
+biblioteca.addBook({title: 'Jogos Vorazes', description: 'Jogo que demonstra temas da sociedade', author: 'Suzanne Collins'})
+biblioteca.addBook({title: 'Diário de um Banana', description: 'A vida de um adolescente norte-americano', author: 'Jeff Kinney'})
+biblioteca.getBooks()
+
+biblioteca.removeBookById('Jogos Vorazes')
+biblioteca.getBooks()
+
+biblioteca.getBookById('Diário de um Banana')
+biblioteca.getBookById('Fênix: A Ilha')
+
+biblioteca.updateBookById('Zorro', {title: 'Zorro', description: 'Um cavaleiro habilidoso e mascarado', author: 'Isabel Allende'})
+biblioteca.getBooks()
+
+biblioteca.addBook({title: 'Zac Power', description: 'Um espião adolescente', author: 'H. I. Larry'})
+biblioteca.getBooks()
